@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <th>Kurs</th>
+    <th>Veranstaltungsort</th>
+    <th>Adresse des Veranstaltungsortes</th>
+    <th>Öffentlich erreichbar?</th>
+    <th>Kursleiter</th>
+    <th>Alle Termine</th>
+  </tr>
+  @for(course of store.courses; track $index) {
+  <tr>
+    <td>{{ course.name }}</td>
+    <td>{{ course.eventLocation.name }}</td>
+    <td>{{ course.eventLocation.address }}</td>
+    <td>{{ course.eventLocation.venueByPublicTansport == true ? 'Ja' : 'Nein' }}</td>
+    <td>{{ course.instructor }}</td>
+    <td>
+      <ul>
+        @for(date of course.dates; track $index) {
+        <li>
+          <span>{{ date.begin | date : "MMM dd, yyyy 'um' hh:mm a" }}</span> -
+          <span>{{ date.end | date : "MMM dd, yyyy 'um' hh:mm a" }}</span>
+        </li>
+        }
+      </ul>
+    </td>
+  </tr>
+  }
+</table>
