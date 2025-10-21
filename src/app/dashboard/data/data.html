@@ -7,7 +7,7 @@
     <th>Kursleiter</th>
     <th>Alle Termine</th>
   </tr>
-  @for(course of store.courses; track $index) {
+  @for(course of courses; track $index) {
   <tr>
     <td>{{ course.name }}</td>
     <td>{{ course.eventLocation.name }}</td>
