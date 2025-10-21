@@ -1,1 +1,13 @@
-<p>add-data works!</p>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <h2>Zum Kurs anmelden!</h2>
+  <input placeholder="Name" type="input" formControlName="name" /><br />
+  <input placeholder="Geburtsdatum" type="date" formControlName="birthdate" /><br />
+  <select formControlName="courses">
+    <option value="" disabled>Bitte auswählen</option>
+    @for (course of courses; track $index) {
+    <option [ngValue]="course.id">{{ course.name }}</option>
+    }
+  </select>
+
+  <button type="submit">Erfassen</button>
+</form>
