@@ -1,6 +1,7 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
   <h2>Zum Kurs anmelden!</h2>
-  <input placeholder="Name" type="input" formControlName="name" /><br />
+  <!--<input placeholder="Name" type="input" formControlName="name" 
+    [ngClass]="{'is-invalid': !this.signupForm.get('name') && this.signupForm.get('name')?.touched}"/><br />
   <input placeholder="Geburtsdatum" type="date" formControlName="birthdate" /><br />
   <select formControlName="courses">
     <option value="" disabled>Bitte auswählen</option>
@@ -8,6 +9,48 @@
     <option [ngValue]="course.id">{{ course.name }}</option>
     }
   </select>
+  <br/>
+  <input placeholder="Email" type="email" formControlName="email" /><br />
+  <input type="checkbox" formControlName="newsletter"/>  
+  <label for="newsletter">Newsletter abonnieren</label>
+  <br>
 
-  <button type="submit">Erfassen</button>
+
+  <button type="submit" [disabled]="!this.signupForm.valid">Erfassen</button>-->
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" type="text">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Geburtsdatum</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" type="email">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Kurs auswählen</mat-label>
+    <mat-select>
+      
+        @for (course of courses; track $index) {
+          <mat-option [value]="course.id"> {{ course.name }} </mat-option>
+        }
+      
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  <section>
+    <mat-checkbox [disabled]="!this.signupForm.valid">Newsletter abonnieren</mat-checkbox>
+  </section>
 </form>
