@@ -1,29 +1,31 @@
-<table>
-  <tr>
-    <th>Kurs</th>
-    <th>Veranstaltungsort</th>
-    <th>Adresse des Veranstaltungsortes</th>
-    <th>Öffentlich erreichbar?</th>
-    <th>Kursleiter</th>
-    <th>Alle Termine</th>
-  </tr>
+<div class="container">
+  <div class="grid-row grid-header">
+    <div>Kurs</div>
+    <div>Veranstaltungsort</div>
+    <div>Adresse des Veranstaltungsortes</div>
+    <div>Öffentlich erreichbar?</div>
+    <div>Kursleiter</div>
+    <div>Alle Termine</div>
+  </div>
+
   @for(course of courses; track $index) {
-  <tr>
-    <td>{{ course.name }}</td>
-    <td>{{ course.eventLocation.name }}</td>
-    <td>{{ course.eventLocation.address }}</td>
-    <td>{{ course.eventLocation.venueByPublicTansport == true ? 'Ja' : 'Nein' }}</td>
-    <td>{{ course.instructor }}</td>
-    <td>
-      <ul>
-        @for(date of course.dates; track $index) {
-        <li>
-          <span>{{ date.begin | date : "MMM dd, yyyy 'um' hh:mm a" }}</span> -
-          <span>{{ date.end | date : "MMM dd, yyyy 'um' hh:mm a" }}</span>
-        </li>
-        }
-      </ul>
-    </td>
-  </tr>
+    <div class="grid-row">
+      <div class="row-content">{{ course.name }}</div>
+      <div class="row-content">{{ course.eventLocation.name }}</div>
+      <div class="row-content">{{ course.eventLocation.address }}</div>
+      <div class="row-content">{{ course.eventLocation.venueByPublicTansport == true ? 'Ja' : 'Nein' }}</div>
+      <div class="row-content">{{ course.instructor }}</div>
+      <div>
+        <ul>
+          @for(date of course.dates; track $index) {
+          <li>
+            <span>{{ date.begin | date : "MMM dd, yyyy 'um' hh:mm a" }}</span> -
+            <span>{{ date.end | date : "MMM dd, yyyy 'um' hh:mm a" }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+    
   }
-</table>
+</div>
