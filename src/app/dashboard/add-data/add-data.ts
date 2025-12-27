@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { courses } from '../../shared/data';
 import { NgClass } from "@angular/common";
 import { MatDatepicker, MatDatepickerModule, MatDatepickerToggle } from '@angular/material/datepicker';
@@ -8,6 +8,7 @@ import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatAnchor } from "@angular/material/button";
 @Component({
   selector: 'app-add-data',
   imports: [
@@ -21,7 +22,10 @@ import { MatSelect, MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckbox,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAnchor
 ],
   templateUrl: './add-data.html',
   styleUrl: './add-data.scss',
@@ -37,11 +41,11 @@ export class AddData {
 
   ngOnInit() {
     this.signupForm = this.fb.group({
-      name: ['', Validators.required],
-      birthdate: ['', Validators.required],
-      courses: ['', Validators.required],
-      email: ['', [Validators.required]],
-      newsletter: [false],
+      name: new FormControl('', [Validators.required]),
+      birthdate: new FormControl('', [Validators.required]),
+      selectedCourse: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      newsletter: [false]
     });
   }
 
