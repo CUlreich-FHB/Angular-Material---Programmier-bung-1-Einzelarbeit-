@@ -20,27 +20,40 @@
 
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" type="text">
+    <input matInput placeholder="Name" type="text" formControlName="name">
+    @if(this.signupForm.get('name')?.hasError('required')) {
+      <mat-error>Name is <strong>required</strong></mat-error>
+    }
   </mat-form-field>
   <br>
 
   <mat-form-field>
     <mat-label>Geburtsdatum</mat-label>
-    <input matInput [matDatepicker]="picker">
+    <input matInput [matDatepicker]="picker" formControlName="birthdate">
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+
+    @if (this.signupForm.get('birthdate')?.hasError('required')) {
+      <mat-error>Geburtsdatum is <strong>required</strong></mat-error>
+    }
   </mat-form-field>
   <br>
 
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input matInput placeholder="Email" type="email">
+    <input matInput placeholder="Email" type="email" formControlName="email">
+    @if (this.signupForm.get('email')?.hasError('email') && !this.signupForm.get('email')?.hasError('required')) {
+      <mat-error>Please enter a valid email address</mat-error>
+    }
+    @if (this.signupForm.get('email')?.hasError('required')) {
+      <mat-error>Email is <strong>required</strong></mat-error>
+    }
   </mat-form-field>
   <br>
 
   <mat-form-field>
     <mat-label>Kurs auswählen</mat-label>
-    <mat-select>
+    <mat-select formControlName="selectedCourse">
       
         @for (course of courses; track $index) {
           <mat-option [value]="course.id"> {{ course.name }} </mat-option>
@@ -50,7 +63,8 @@
   </mat-form-field>
   <br>
 
-  <section>
-    <mat-checkbox [disabled]="!this.signupForm.valid">Newsletter abonnieren</mat-checkbox>
-  </section>
+  <mat-checkbox formControlName="newsletter">Newsletter abonnieren</mat-checkbox>
+  <br>
+
+  <button matButton="filled" type="submit" [disabled]="!this.signupForm.valid">Erfassen</button>
 </form>
