@@ -12,12 +12,10 @@ import { MatAnchor } from "@angular/material/button";
 @Component({
   selector: 'app-add-data',
   imports: [
-    NgClass,
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatDatepicker,
-    MatHint,
     MatDatepickerToggle,
     MatDatepickerModule,
     MatNativeDateModule,
